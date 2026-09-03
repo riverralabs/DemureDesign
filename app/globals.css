@@ -56,6 +56,8 @@ body {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
+  /* prevent any decorative element from creating horizontal scroll */
+  overflow-x: hidden;
 }
 
 a {
@@ -105,38 +107,97 @@ a {
   border-bottom: 1px solid var(--hairline);
 }
 
-.header-inner,
+.header-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 4px;
+  min-height: 60px;
+}
+
+@media (min-width: 360px) {
+  .header-inner {
+    gap: 0 8px;
+  }
+}
+
+/* Hide the Gumroad nav link in the header at very narrow widths;
+   it remains in the footer and the hero has a direct Etsy CTA */
+.header-nav .header-gumroad {
+  display: none;
+}
+
+@media (min-width: 340px) {
+  .header-nav .header-gumroad {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 480px) {
+  .header-inner {
+    gap: 0 24px;
+    min-height: 72px;
+  }
+}
+
 .footer-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px 24px;
-}
-
-.header-inner {
-  min-height: 72px;
+  gap: 8px 24px;
 }
 
 .brand {
   display: inline-flex;
   min-height: var(--target);
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--teal);
   text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .brand-mark {
-  width: 44px;
-  height: 36px;
+  width: 30px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 360px) {
+  .brand-mark {
+    width: 36px;
+    height: 30px;
+  }
+}
+
+@media (min-width: 480px) {
+  .brand-mark {
+    width: 44px;
+    height: 36px;
+  }
 }
 
 .brand-name {
   font-weight: 600;
-  font-size: 18px;
-  letter-spacing: -0.02em;
+  font-size: 14px;
+  letter-spacing: -0.01em;
   color: var(--ink);
+}
+
+@media (min-width: 360px) {
+  .brand-name {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 480px) {
+  .brand-name {
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
 }
 
 .header-nav,
@@ -152,10 +213,29 @@ a {
   display: inline-flex;
   min-height: var(--target);
   align-items: center;
-  padding: 0 8px;
+  padding: 0 4px;
   color: var(--caption);
   text-decoration: none;
   font-weight: 500;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+@media (min-width: 360px) {
+  .header-nav a,
+  .footer-links a {
+    padding: 0 5px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 480px) {
+  .header-nav a,
+  .footer-links a,
+  .footer-mail {
+    padding: 0 8px;
+    font-size: inherit;
+  }
 }
 
 .header-nav a:hover,
@@ -183,11 +263,16 @@ a {
   gap: 28px;
   padding: 36px 0 56px;
   align-items: center;
+  /* prevent SVG decoration from causing horizontal scroll */
+  overflow: hidden;
 }
 
 .hero-art {
-  width: min(100%, 420px);
+  width: min(100%, 360px);
   margin: 0 auto;
+  /* clip anything that bleeds outside the grid column */
+  overflow: visible;
+  max-width: 100%;
 }
 
 .hero-copy {
@@ -208,9 +293,9 @@ a {
 .legal h1 {
   margin: 0 0 16px;
   font-weight: 600;
-  font-size: clamp(34px, 6vw, 52px);
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: clamp(28px, 6vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .section-title {
@@ -233,6 +318,12 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* Stack hero CTAs full-width on small phones */
+.cta-row .btn {
+  flex: 1 1 auto;
+  min-width: min-content;
 }
 
 .btn {
@@ -265,7 +356,28 @@ a {
 .how-section,
 .about-section,
 .legal {
-  padding: 24px 0 8px;
+  padding: 20px 0 8px;
+}
+
+@media (min-width: 480px) {
+  .shop-section,
+  .how-section,
+  .about-section,
+  .legal {
+    padding: 32px 0 8px;
+  }
+}
+
+/* Stretch both buy buttons across the full card width on narrow screens */
+@media (max-width: 479px) {
+  .product-card .product-links {
+    flex-direction: column;
+  }
+  .product-card .product-links .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 #shop {

@@ -19,7 +19,12 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             <a href={ETSY_SHOP} rel="noopener noreferrer" target="_blank">
               Etsy
             </a>
-            <a href={GUMROAD_SHOP} rel="noopener noreferrer" target="_blank">
+            <a
+              className="header-gumroad"
+              href={GUMROAD_SHOP}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               Gumroad
             </a>
           </nav>
