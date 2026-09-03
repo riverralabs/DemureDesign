@@ -1,42 +1,22 @@
-# DemureDesign
+# Demure Design
 
-Welcome to DemureDesign! This project represents a thoughtful approach to design and development.
+Brand landing for [Demure Design](https://demure.design) printables. One page. Instant download, nothing ships.
 
-## About
+## Stack
 
-DemureDesign is a repository dedicated to elegant and understated design principles. Our focus is on creating solutions that are both functional and aesthetically refined.
+- Next.js App Router
+- Production on Vercel
 
-## Getting Started
-
-To get started with this project, clone the repository and follow the setup instructions below.
+## Local
 
 ```bash
-git clone https://github.com/riverralabs/DemureDesign.git
-cd DemureDesign
+npm install
+npm run dev
 ```
 
-## Features
+## Shop
 
-- Clean and minimal design approach
-- Well-organized code structure
-- Easy to understand and extend
+- [Etsy](https://www.etsy.com/shop/TheDemureDesign)
+- [Gumroad](https://demuredesign.gumroad.com)
 
-## Installation
-
-[Add installation instructions here]
-
-## Usage
-
-[Add usage instructions here]
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-[Add license information here]
-
-## Contact
-
-For more information, visit the [DemureDesign repository](https://github.com/riverralabs/DemureDesign).
+Contact: [hello@demure.design](mailto:hello@demure.design)
