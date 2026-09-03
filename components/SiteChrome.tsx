@@ -33,7 +33,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <main id="content">{children}</main>
       <footer className="site-footer">
         <div className="shell footer-inner">
-          <p className="footer-identity">Riverra Labs LLP</p>
+          <p className="footer-identity">Demure Design</p>
           <a className="footer-mail" href={`mailto:${EMAIL}`}>
             {EMAIL}
           </a>
