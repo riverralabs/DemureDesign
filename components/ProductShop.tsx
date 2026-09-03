@@ -1,7 +1,6 @@
 "use client";
 
 import type { Product, ProductCategory } from "@/lib/products";
-import { formatPrice } from "@/lib/shop";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -70,7 +69,7 @@ export function ProductShop({ products }: { products: Product[] }) {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  Etsy {formatPrice(product.etsy.price)}
+                  Shop on Etsy
                 </a>
                 {product.gumroad ? (
                   <a
@@ -79,7 +78,7 @@ export function ProductShop({ products }: { products: Product[] }) {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Gumroad {formatPrice(product.gumroad.price)}
+                    Shop on Gumroad
                   </a>
                 ) : null}
               </div>

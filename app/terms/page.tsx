@@ -19,8 +19,11 @@ export default function TermsPage() {
         Files are for personal use unless a listing says otherwise.
       </p>
       <p>
-        Listings, prices, and file delivery are handled by Etsy or Gumroad at
-        checkout.
+        Listings and file delivery are handled by Etsy or Gumroad at checkout.
+      </p>
+      <p>
+        These are digital files delivered instantly. Nothing ships. Because you
+        receive the files at purchase, all sales are final. No refunds.
       </p>
       <p>
         Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>

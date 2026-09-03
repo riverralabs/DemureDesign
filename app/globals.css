@@ -523,6 +523,46 @@ a {
   border: 0;
 }
 
+.banner-section {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.policy-note {
+  margin: 20px 0 0;
+  max-width: 36em;
+  color: var(--caption);
+  font-size: 15px;
+}
+
+@media (max-width: 479px) {
+  .cta-row {
+    flex-direction: column;
+  }
+
+  .cta-row .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 879px) {
+  .hero {
+    padding: 16px 0 28px;
+    gap: 12px;
+  }
+
+  .hero-art {
+    width: min(70%, 240px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

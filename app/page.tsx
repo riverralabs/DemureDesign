@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { FloralCluster } from "@/components/FloralCluster";
 import { ProductShop } from "@/components/ProductShop";
 import { products } from "@/lib/products";
@@ -41,6 +42,18 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="banner-section" aria-label="Brand banner">
+        <Image
+          src="/banner.jpg"
+          alt="Designed for your everyday and special moments. Planners and kids activities."
+          width={3750}
+          height={938}
+          className="banner-image"
+          sizes="100vw"
+          priority
+        />
+      </section>
+
       <section className="shop-section" id="shop" aria-label="Printables">
         <div className="shell">
           <ProductShop products={products} />
@@ -67,6 +80,9 @@ export default function HomePage() {
               <p>Print at home. Reprint whenever you want.</p>
             </li>
           </ol>
+          <p className="policy-note">
+            Digital files only. Nothing ships. Sales are final. No refunds.
+          </p>
         </div>
       </section>
 
@@ -81,8 +97,10 @@ export default function HomePage() {
             Instant download. Nothing ships.
           </p>
           <p>
-            Riverra Labs LLP. Questions:{" "}
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            Files are delivered at checkout, so sales are final. No refunds.
+          </p>
+          <p>
+            Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
           </p>
         </div>
       </section>
