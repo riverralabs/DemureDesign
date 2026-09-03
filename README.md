@@ -1,6 +1,15 @@
 # Demure Design
 
-Brand landing for [Demure Design](https://demure.design) printables. One page. Instant download, nothing ships.
+Printables for quiet time, planning, and little hands. Instant download. Nothing ships.
+
+Site: [demure.design](https://demure.design)
+
+## Shop
+
+- [Etsy](https://www.etsy.com/shop/TheDemureDesign)
+- [Gumroad](https://demuredesign.gumroad.com)
+
+Contact: [hello@demure.design](mailto:hello@demure.design)
 
 ## Stack
 
@@ -13,10 +22,3 @@ Brand landing for [Demure Design](https://demure.design) printables. One page. I
 npm install
 npm run dev
 ```
-
-## Shop
-
-- [Etsy](https://www.etsy.com/shop/TheDemureDesign)
-- [Gumroad](https://demuredesign.gumroad.com)
-
-Contact: [hello@demure.design](mailto:hello@demure.design)

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { LogoMark } from "@/components/LogoMark";
+import { EMAIL, ETSY_SHOP, GUMROAD_SHOP } from "@/lib/shop";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
@@ -7,22 +9,41 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <header className="site-header">
-        <div className="shell">
-          <Link className="wordmark" href="/">
-            Demure Design
+        <div className="shell header-inner">
+          <Link className="brand" href="/">
+            <LogoMark className="brand-mark" />
+            <span className="brand-name">Demure Design</span>
           </Link>
+          <nav className="header-nav" aria-label="Primary">
+            <Link href="/#shop">Shop</Link>
+            <a href={ETSY_SHOP} rel="noopener noreferrer" target="_blank">
+              Etsy
+            </a>
+            <a
+              className="header-gumroad"
+              href={GUMROAD_SHOP}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Gumroad
+            </a>
+          </nav>
         </div>
       </header>
-      <main id="content" className="shell">
-        {children}
-      </main>
+      <main id="content">{children}</main>
       <footer className="site-footer">
-        <div className="shell">
+        <div className="shell footer-inner">
           <p className="footer-identity">Riverra Labs LLP</p>
-          <a className="footer-mail" href="mailto:hello@demure.design">
-            hello@demure.design
+          <a className="footer-mail" href={`mailto:${EMAIL}`}>
+            {EMAIL}
           </a>
-          <nav className="footer-links" aria-label="Legal">
+          <nav className="footer-links" aria-label="Footer">
+            <a href={ETSY_SHOP} rel="noopener noreferrer" target="_blank">
+              Etsy
+            </a>
+            <a href={GUMROAD_SHOP} rel="noopener noreferrer" target="_blank">
+              Gumroad
+            </a>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
           </nav>
