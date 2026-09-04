@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { EMAIL } from "@/lib/shop";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <article className="shell legal">
+    <article className="legal">
       <p className="eyebrow">Legal</p>
       <h1>Privacy</h1>
       <p>
@@ -23,7 +22,8 @@ export default function PrivacyPage() {
         practices.
       </p>
       <p>
-        Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        Questions:{" "}
+        <a href="mailto:hello@demure.design">hello@demure.design</a>
       </p>
     </article>
   );
