@@ -2,28 +2,28 @@ export function FloralCluster({ className }: { className?: string }) {
   return (
     <svg
       className={className}
-      viewBox="0 0 360 420"
+      viewBox="0 0 400 440"
       aria-hidden="true"
       focusable="false"
     >
       <path
         fill="var(--flora-pink)"
-        d="M-20 90 C40 40, 70 120, 40 190 C20 240, -10 280, -40 250 C-20 200, -30 140, -20 90Z"
+        d="M48 150 C110 90, 150 170, 118 240 C96 290, 70 330, 44 300 C58 250, 40 200, 48 150Z"
       />
       <path
         fill="var(--flora-pink)"
-        opacity="0.7"
-        d="M300 30 C340 -10, 390 80, 350 140 C320 180, 280 160, 270 110 C265 70, 280 50, 300 30Z"
+        opacity="0.75"
+        d="M300 70 C348 28, 390 120, 350 180 C322 220, 278 198, 268 148 C262 108, 278 90, 300 70Z"
       />
 
-      <g transform="translate(168 118)">
+      <g transform="translate(248 148)">
         {Array.from({ length: 5 }, (_, i) => (
           <ellipse
             key={i}
             cx="0"
-            cy="-36"
+            cy="-38"
             rx="22"
-            ry="40"
+            ry="42"
             fill="var(--flora-green)"
             transform={`rotate(${i * 72})`}
           />
@@ -31,7 +31,7 @@ export function FloralCluster({ className }: { className?: string }) {
         <circle r="16" fill="#2A4A38" />
       </g>
 
-      <g transform="translate(118 278)">
+      <g transform="translate(168 300)">
         {Array.from({ length: 5 }, (_, i) => (
           <ellipse
             key={i}
