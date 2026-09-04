@@ -1,114 +1,104 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { FloralCluster } from "@/components/FloralCluster";
-import { ProductShop } from "@/components/ProductShop";
-import { getCatalog } from "@/lib/catalog";
-import { EMAIL, ETSY_SHOP } from "@/lib/shop";
-
-export const revalidate = 3600;
+import plannerStill from "@/public/products/quiet-planner.jpg";
+import alphabetStill from "@/public/products/animal-alphabet.jpg";
 
 export const metadata: Metadata = {
   title: "Demure Design",
   description:
-    "Printables for quiet time, planning, and little hands. Instant download, nothing ships.",
+    "Printables for quiet time and planning. Instant download, nothing ships.",
   alternates: {
     canonical: "https://demure.design",
   },
 };
 
-export default async function HomePage() {
-  const products = await getCatalog();
+const ETSY_SHOP = "https://www.etsy.com/shop/TheDemureDesign";
+const GUMROAD_SHOP = "https://demuredesign.gumroad.com";
 
+export default function HomePage() {
   return (
     <>
-      <section className="hero-section">
-        <div className="shell hero">
-          <div className="hero-float">
-            <FloralCluster className="hero-art" />
+      <p className="eyebrow">Calm by design</p>
+      <h1>Printables for quiet time and planning</h1>
+      <p className="lede">Instant download, nothing ships.</p>
+      <div className="cta-row">
+        <a
+          className="btn btn-primary"
+          href={ETSY_SHOP}
+          rel="noopener noreferrer"
+        >
+          Shop on Etsy
+        </a>
+        <a
+          className="btn btn-secondary"
+          href={GUMROAD_SHOP}
+          rel="noopener noreferrer"
+        >
+          Shop on Gumroad
+        </a>
+      </div>
+
+      <section className="products" aria-label="Printables">
+        <article className="product">
+          <h2 className="product-title">The Quiet Planner</h2>
+          <p className="product-meta">111-page undated</p>
+          <Image
+            src={plannerStill}
+            alt="The Quiet Planner listing still: undated planner pages on three tablets, including a habit tracker."
+            sizes="(max-width: 720px) calc(100vw - 48px), 672px"
+            preload
+          />
+          <p className="product-copy">
+            Monthly, weekly, and daily pages, with habits, budget, and
+            reflection. Start on any day.
+          </p>
+          <div className="product-links">
+            <a
+              className="btn btn-primary"
+              href="https://www.etsy.com/listing/4534979142"
+              rel="noopener noreferrer"
+            >
+              Shop on Etsy
+            </a>
+            <a
+              className="btn btn-secondary"
+              href="https://demuredesign.gumroad.com/l/undatedplanner"
+              rel="noopener noreferrer"
+            >
+              Shop on Gumroad
+            </a>
           </div>
-          <div className="hero-copy">
-            <p className="eyebrow">Calm by design</p>
-            <h1>Printables for quiet time, planning, and little hands</h1>
-            <hr className="sun-rule" />
-            <p className="lede">Instant download. Nothing ships.</p>
-            <div className="cta-row">
-              <a className="btn btn-primary" href="#shop">
-                Shop printables
-              </a>
-              <a
-                className="btn btn-secondary"
-                href={ETSY_SHOP}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Shop on Etsy
-              </a>
-            </div>
+        </article>
+
+        <article className="product">
+          <h2 className="product-title">Animal Alphabet Flash Cards</h2>
+          <p className="product-meta">A–Z + shapes</p>
+          <Image
+            src={alphabetStill}
+            alt="Animal Alphabet Flash Cards listing still: letters, animals, and shapes on a paper-colored field."
+            sizes="(max-width: 720px) calc(100vw - 48px), 672px"
+          />
+          <p className="product-copy">
+            Printable cards for letters, animals, and shapes. Download and
+            print at home.
+          </p>
+          <div className="product-links">
+            <a
+              className="btn btn-primary"
+              href="https://www.etsy.com/listing/4566631822"
+              rel="noopener noreferrer"
+            >
+              Shop on Etsy
+            </a>
+            <a
+              className="btn btn-secondary"
+              href="https://demuredesign.gumroad.com/l/animal-alphabet-flash-cards"
+              rel="noopener noreferrer"
+            >
+              Shop on Gumroad
+            </a>
           </div>
-        </div>
-      </section>
-
-      <section className="banner-section" aria-label="Brand banner">
-        <Image
-          src="/banner.jpg"
-          alt="Designed for your everyday and special moments. Planners and kids activities."
-          width={3750}
-          height={938}
-          className="banner-image"
-          sizes="100vw"
-          priority
-        />
-      </section>
-
-      <section className="shop-section" id="shop" aria-label="Printables">
-        <div className="shell">
-          <ProductShop products={products} />
-        </div>
-      </section>
-
-      <section className="how-section" aria-labelledby="how-heading">
-        <div className="shell">
-          <p className="eyebrow">How it works</p>
-          <h2 className="section-title" id="how-heading">
-            Buy. Download. Print.
-          </h2>
-          <ol className="how-grid">
-            <li>
-              <h3>Buy</h3>
-              <p>Pick a printable. Pay on Etsy or Gumroad.</p>
-            </li>
-            <li>
-              <h3>Download</h3>
-              <p>Get the PDF from your purchases right away.</p>
-            </li>
-            <li>
-              <h3>Print</h3>
-              <p>Print at home. Reprint whenever you want.</p>
-            </li>
-          </ol>
-          <p className="policy-note">
-            Digital files only. Nothing ships. Sales are final. No refunds.
-          </p>
-        </div>
-      </section>
-
-      <section className="about-section" aria-labelledby="about-heading">
-        <div className="shell">
-          <p className="eyebrow">About</p>
-          <h2 className="section-title" id="about-heading">
-            Demure Design
-          </h2>
-          <p>
-            Digital printables for quiet time, planning, and little hands.
-            Instant download. Nothing ships.
-          </p>
-          <p>
-            Files are delivered at checkout, so sales are final. No refunds.
-          </p>
-          <p>
-            Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          </p>
-        </div>
+        </article>
       </section>
     </>
   );
