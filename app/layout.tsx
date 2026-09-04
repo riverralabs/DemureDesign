@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Lora, Poppins } from "next/font/google";
+import { Outfit } from "next/font/google";
 import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
 
-const lora = Lora({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: "600",
-  variable: "--font-lora",
-  display: "swap",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-poppins",
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -24,14 +16,14 @@ export const metadata: Metadata = {
     template: "%s · Demure Design",
   },
   description:
-    "Printables for quiet time and planning. Instant download, nothing ships.",
+    "Printables for quiet time, planning, and little hands. Instant download, nothing ships.",
   alternates: {
     canonical: "https://demure.design",
   },
   openGraph: {
     title: "Demure Design",
     description:
-      "Printables for quiet time and planning. Instant download, nothing ships.",
+      "Printables for quiet time, planning, and little hands. Instant download, nothing ships.",
     url: "https://demure.design",
     siteName: "Demure Design",
     locale: "en_US",
@@ -42,7 +34,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f6f1e8",
+  themeColor: "#f7f3ec",
 };
 
 export default function RootLayout({
@@ -51,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-US" className={`${lora.variable} ${poppins.variable}`}>
+    <html lang="en-US" className={outfit.variable}>
       <body>
         <SiteChrome>{children}</SiteChrome>
       </body>
