@@ -6,8 +6,7 @@ Site: [demure.design](https://demure.design)
 
 ## Shop
 
-- [Etsy](https://www.etsy.com/shop/TheDemureDesign)
-- [Gumroad](https://demuredesign.gumroad.com)
+Listings on the homepage come from the live [Etsy shop](https://www.etsy.com/shop/TheDemureDesign) feed, refreshed about once an hour. Toddler tees stay off this page. Known printables also link to [Gumroad](https://demuredesign.gumroad.com).
 
 Contact: [hello@demure.design](mailto:hello@demure.design)
 

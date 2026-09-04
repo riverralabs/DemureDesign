@@ -263,16 +263,32 @@ a {
   gap: 28px;
   padding: 36px 0 56px;
   align-items: center;
-  /* prevent SVG decoration from causing horizontal scroll */
-  overflow: hidden;
+}
+
+.hero-float {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  min-width: 0;
 }
 
 .hero-art {
   width: min(100%, 360px);
-  margin: 0 auto;
-  /* clip anything that bleeds outside the grid column */
-  overflow: visible;
   max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 16px 28px rgba(31, 42, 46, 0.16));
+  animation: float-y 5.5s ease-in-out infinite;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 .hero-copy {
@@ -441,13 +457,13 @@ a {
 
 .product-media {
   position: relative;
-  aspect-ratio: 4 / 3;
-  background: var(--hairline);
+  aspect-ratio: 1 / 1;
+  background: #efe8dc;
 }
 
 .product-media img {
-  object-fit: cover;
-  object-position: top;
+  object-fit: contain;
+  object-position: center;
 }
 
 .product-title {
@@ -527,12 +543,14 @@ a {
   width: 100%;
   overflow: hidden;
   line-height: 0;
+  background: #3e7eb8;
 }
 
 .banner-image {
   display: block;
   width: 100%;
   height: auto;
+  object-fit: contain;
 }
 
 .policy-note {
@@ -559,13 +577,17 @@ a {
   }
 
   .hero-art {
-    width: min(70%, 240px);
+    width: min(78%, 260px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero-art {
+    animation: none;
   }
 }
 
@@ -586,7 +608,7 @@ a {
     padding: 56px 0 72px;
   }
 
-  .hero-art {
-    margin: 0;
+  .hero-float {
+    justify-content: flex-start;
   }
 }

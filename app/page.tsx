@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { FloralCluster } from "@/components/FloralCluster";
 import { ProductShop } from "@/components/ProductShop";
-import { products } from "@/lib/products";
+import { getCatalog } from "@/lib/catalog";
 import { EMAIL, ETSY_SHOP } from "@/lib/shop";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Demure Design",
@@ -14,12 +16,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const products = await getCatalog();
+
   return (
     <>
       <section className="hero-section">
         <div className="shell hero">
-          <FloralCluster className="hero-art" />
+          <div className="hero-float">
+            <FloralCluster className="hero-art" />
+          </div>
           <div className="hero-copy">
             <p className="eyebrow">Calm by design</p>
             <h1>Printables for quiet time, planning, and little hands</h1>

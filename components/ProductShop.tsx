@@ -48,7 +48,7 @@ export function ProductShop({ products }: { products: Product[] }) {
       </div>
 
       <ul className="product-grid">
-        {visible.map((product) => (
+        {visible.map((product, index) => (
           <li key={product.id}>
             <article className="product-card">
               <div className="product-media">
@@ -57,7 +57,7 @@ export function ProductShop({ products }: { products: Product[] }) {
                   alt={product.imageAlt}
                   fill
                   sizes="(max-width: 720px) calc(100vw - 48px), (max-width: 1120px) 50vw, 528px"
-                  priority={product.id === "quiet-planner"}
+                  priority={index === 0}
                 />
               </div>
               <h3 className="product-title">{product.name}</h3>
