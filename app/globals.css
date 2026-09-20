@@ -368,6 +368,51 @@ a {
   color: var(--teal);
 }
 
+.btn-etsy,
+.btn-gumroad {
+  gap: 8px;
+}
+
+.btn-mark {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-etsy {
+  background: #f1641e;
+  border-color: #f1641e;
+  color: #fff;
+}
+
+.btn-etsy:hover {
+  background: #d95516;
+  border-color: #d95516;
+}
+
+.btn-gumroad {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.btn-gumroad:hover {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+.btn-mark-gumroad {
+  color: #ff90e8;
+}
+
+.legal h2 {
+  margin: 28px 0 12px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
 .shop-section,
 .how-section,
 .about-section,
