@@ -3,17 +3,25 @@ import Image from "next/image";
 import { FloralCluster } from "@/components/FloralCluster";
 import { ProductShop } from "@/components/ProductShop";
 import { getCatalog } from "@/lib/catalog";
+import { homeJsonLd, jsonLdScript } from "@/lib/json-ld";
 import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
 import { EMAIL, ETSY_SHOP, GUMROAD_SHOP } from "@/lib/shop";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Demure Design",
+  title: {
+    absolute: "Demure Design · Printables for quiet time and planning",
+  },
   description:
-    "Printables for quiet time, planning, and little hands. Instant download, nothing ships.",
+    "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
   alternates: {
     canonical: "https://demure.design",
+  },
+  openGraph: {
+    title: "Printables for quiet time and planning",
+    description:
+      "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
   },
 };
 
@@ -22,6 +30,12 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(homeJsonLd(products)),
+        }}
+      />
       <section className="hero-section">
         <div className="shell hero">
           <div className="hero-float">
@@ -29,13 +43,18 @@ export default async function HomePage() {
           </div>
           <div className="hero-copy">
             <p className="eyebrow">Calm by design</p>
-            <h1>Printables for quiet time, planning, and little hands</h1>
+            <h1>Calm planning and quiet play, ready to print</h1>
             <hr className="sun-rule" />
-            <p className="lede">Instant download. Nothing ships.</p>
+            <p className="lede">
+              Undated planners and kids printables you can print at home.
+            </p>
             <div className="cta-row">
               <ShopOnGumroad href={GUMROAD_SHOP} />
               <ShopOnEtsy href={ETSY_SHOP} />
             </div>
+            <p className="cta-note">
+              Listing photos show the pages. Files arrive at checkout.
+            </p>
           </div>
         </div>
       </section>
@@ -44,11 +63,12 @@ export default async function HomePage() {
         <Image
           src="/banner.jpg"
           alt="Designed for your everyday and special moments. Planners and kids activities."
-          width={3750}
-          height={938}
+          width={1920}
+          height={480}
           className="banner-image"
           sizes="100vw"
-          priority
+          fetchPriority="high"
+          loading="eager"
         />
       </section>
 
@@ -84,6 +104,35 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="faq-section" aria-labelledby="faq-heading">
+        <div className="shell">
+          <p className="eyebrow">Questions</p>
+          <h2 className="section-title" id="faq-heading">
+            Before you buy
+          </h2>
+          <dl className="faq-list">
+            <div>
+              <dt>Do these printables ship?</dt>
+              <dd>
+                No. They are digital files. You download them after checkout.
+                Nothing ships.
+              </dd>
+            </div>
+            <div>
+              <dt>Do you offer refunds?</dt>
+              <dd>
+                No. Files arrive at purchase, so all sales are final. We do not
+                provide refunds, returns, or exchanges.
+              </dd>
+            </div>
+            <div>
+              <dt>Etsy or Gumroad?</dt>
+              <dd>The same printables are on both. Pick the shop you prefer.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
       <section className="about-section" aria-labelledby="about-heading">
         <div className="shell">
           <p className="eyebrow">About</p>
@@ -91,12 +140,10 @@ export default async function HomePage() {
             Demure Design
           </h2>
           <p>
-            Digital printables for quiet time, planning, and little hands.
-            Instant download. Nothing ships.
+            A small studio making digital printables for quiet time, planning,
+            and little hands.
           </p>
-          <p>
-            Files are delivered at checkout, so sales are final. No refunds.
-          </p>
+          <p>Instant download. Nothing ships. Files are for personal use.</p>
           <p>
             Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
           </p>

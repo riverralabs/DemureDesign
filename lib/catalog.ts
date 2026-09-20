@@ -1,5 +1,10 @@
 import { ETSY_RSS } from "@/lib/shop";
-import { fallbackProducts, type Product, type ProductCategory } from "@/lib/products";
+import {
+  fallbackProducts,
+  PRODUCT_FACTS,
+  type Product,
+  type ProductCategory,
+} from "@/lib/products";
 
 const GUMROAD_BY_LISTING: Record<string, string> = {
   "4534979142": "https://demuredesign.gumroad.com/l/undatedplanner",
@@ -58,9 +63,21 @@ function shortName(listingId: string, title: string) {
     .trim();
 }
 
-function factsFrom(description: string) {
+function factsFrom(listingId: string, description: string) {
+  if (PRODUCT_FACTS[listingId]) return PRODUCT_FACTS[listingId];
+
   const clean = decode(description);
-  const sentence = clean.split(". ")[0]?.trim() || clean;
+  const sentences = clean
+    .split(". ")
+    .map((part) => part.trim())
+    .filter(Boolean);
+  const useful = sentences.find(
+    (sentence) =>
+      !/instant digital download|nothing ships|this is a digital file|digital files only/i.test(
+        sentence,
+      ),
+  );
+  const sentence = useful || sentences[0] || clean;
   if (sentence.length <= 140) {
     return /[.!?]$/.test(sentence) ? sentence : `${sentence}.`;
   }
@@ -130,7 +147,7 @@ export async function getCatalog(): Promise<Product[]> {
       return {
         id: item.listingId,
         name,
-        facts: factsFrom(item.description),
+        facts: factsFrom(item.listingId, item.description),
         category: classify(item.title),
         image: item.image,
         imageAlt: name,

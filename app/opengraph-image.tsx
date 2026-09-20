@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Demure Design. Printables for quiet time, planning, and little hands.";
+  "Demure Design. Calm planning and quiet play, ready to print.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -93,7 +93,7 @@ export default function OpenGraphImage() {
               maxWidth: 720,
             }}
           >
-            Printables for quiet time, planning, and little hands
+            Calm planning and quiet play, ready to print
           </div>
           <div
             style={{
@@ -102,7 +102,7 @@ export default function OpenGraphImage() {
               color: "#5C6A70",
             }}
           >
-            Instant download. Nothing ships.
+            Undated planners and kids printables. Print at home.
           </div>
         </div>
       </div>

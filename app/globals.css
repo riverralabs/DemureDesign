@@ -336,6 +336,14 @@ a {
   gap: 12px;
 }
 
+.cta-note,
+.policy-note {
+  margin: 16px 0 0;
+  max-width: 36em;
+  color: var(--caption);
+  font-size: 15px;
+}
+
 /* Stack hero CTAs full-width on small phones */
 .cta-row .btn {
   flex: 1 1 auto;
@@ -416,6 +424,7 @@ a {
 
 .shop-section,
 .how-section,
+.faq-section,
 .about-section,
 .legal {
   padding: 20px 0 8px;
@@ -424,6 +433,7 @@ a {
 @media (min-width: 480px) {
   .shop-section,
   .how-section,
+  .faq-section,
   .about-section,
   .legal {
     padding: 32px 0 8px;
@@ -599,11 +609,34 @@ a {
   object-fit: contain;
 }
 
-.policy-note {
-  margin: 20px 0 0;
+.faq-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
   max-width: 36em;
+}
+
+.faq-list div {
+  padding: 20px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.faq-list dt {
+  margin: 0 0 8px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.faq-list dd {
+  margin: 0;
   color: var(--caption);
-  font-size: 15px;
+}
+
+.legal-updated {
+  margin: 24px 0 0;
+  color: var(--caption);
+  font-size: 14px;
 }
 
 @media (max-width: 479px) {

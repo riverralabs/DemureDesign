@@ -37,6 +37,7 @@ export default function PrivacyPage() {
       <p>
         Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
       </p>
+      <p className="legal-updated">Updated 20 September 2026</p>
     </article>
   );
 }
