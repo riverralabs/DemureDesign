@@ -3,8 +3,8 @@ import Image from "next/image";
 import { FloralCluster } from "@/components/FloralCluster";
 import { ProductShop } from "@/components/ProductShop";
 import { getCatalog } from "@/lib/catalog";
-import { ShopOnEtsy } from "@/components/ShopButtons";
-import { EMAIL, ETSY_SHOP } from "@/lib/shop";
+import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
+import { EMAIL, ETSY_SHOP, GUMROAD_SHOP } from "@/lib/shop";
 
 export const revalidate = 3600;
 
@@ -33,9 +33,7 @@ export default async function HomePage() {
             <hr className="sun-rule" />
             <p className="lede">Instant download. Nothing ships.</p>
             <div className="cta-row">
-              <a className="btn btn-primary" href="#shop">
-                Shop printables
-              </a>
+              <ShopOnGumroad href={GUMROAD_SHOP} />
               <ShopOnEtsy href={ETSY_SHOP} />
             </div>
           </div>

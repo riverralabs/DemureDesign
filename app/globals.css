@@ -123,7 +123,7 @@ a {
 }
 
 /* Hide the Gumroad nav link in the header at very narrow widths;
-   it remains in the footer and the hero has a direct Etsy CTA */
+   it remains in the footer and the hero has a direct Gumroad CTA */
 .header-nav .header-gumroad {
   display: none;
 }
@@ -392,18 +392,18 @@ a {
 }
 
 .btn-gumroad {
-  background: #000;
-  border-color: #000;
-  color: #fff;
+  background: #ff90e8;
+  border-color: #ff90e8;
+  color: #111;
 }
 
 .btn-gumroad:hover {
-  background: #1a1a1a;
-  border-color: #1a1a1a;
+  background: #ff7adf;
+  border-color: #ff7adf;
 }
 
 .btn-mark-gumroad {
-  color: #ff90e8;
+  color: #111;
 }
 
 .legal h2 {
