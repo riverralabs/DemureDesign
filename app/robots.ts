@@ -1,12 +1,19 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/shop";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: "https://demure.design/sitemap.xml",
-    host: "https://demure.design",
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+      },
+    ],
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }
