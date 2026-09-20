@@ -12,18 +12,18 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL("https://demure.design"),
   title: {
-    default: "Demure Design",
+    default: "Demure Design · Printables for quiet time and planning",
     template: "%s · Demure Design",
   },
   description:
-    "Printables for quiet time, planning, and little hands. Instant download, nothing ships.",
+    "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
   alternates: {
     canonical: "https://demure.design",
   },
   openGraph: {
-    title: "Demure Design",
+    title: "Printables for quiet time and planning",
     description:
-      "Printables for quiet time, planning, and little hands. Instant download, nothing ships.",
+      "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
     url: "https://demure.design",
     siteName: "Demure Design",
     locale: "en_US",

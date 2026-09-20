@@ -35,6 +35,7 @@ export default function TermsPage() {
       <p>
         Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
       </p>
+      <p className="legal-updated">Updated 20 September 2026</p>
     </article>
   );
 }

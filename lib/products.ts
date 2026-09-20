@@ -11,11 +11,23 @@ export type Product = {
   gumroad?: { url: string };
 };
 
+export const PRODUCT_FACTS: Record<string, string> = {
+  "4534979142":
+    "Undated monthly, weekly, and daily pages you can start on any day.",
+  "4563523161": "Eight simple sea animals for little hands.",
+  "4542113652":
+    "Thirty easy animals. One per page. Print again whenever you want.",
+  "4566631822":
+    "Printable animal alphabet cards your 3 to 6 year old can say out loud.",
+  "4534956675": "Thirty-six lunch box notes with calm, kind words.",
+  "4539280226": "Seven wall posters for letters, numbers, and shapes.",
+};
+
 export const fallbackProducts: Product[] = [
   {
     id: "4534979142",
     name: "The Quiet Planner",
-    facts: "111 pages. A4, A5, and US Letter PDFs.",
+    facts: PRODUCT_FACTS["4534979142"],
     category: "planning",
     image: "/products/planner.jpg",
     imageAlt:
@@ -26,7 +38,7 @@ export const fallbackProducts: Product[] = [
   {
     id: "4563523161",
     name: "Sea Animal Coloring",
-    facts: "8 toddler pages. US Letter PDF.",
+    facts: PRODUCT_FACTS["4563523161"],
     category: "kids",
     image: "/products/sea-coloring.jpg",
     imageAlt:
@@ -37,7 +49,7 @@ export const fallbackProducts: Product[] = [
   {
     id: "4542113652",
     name: "Easy Animal Coloring",
-    facts: "30 pages. US Letter PDF.",
+    facts: PRODUCT_FACTS["4542113652"],
     category: "kids",
     image: "/products/animal-coloring.jpg",
     imageAlt:
@@ -50,7 +62,7 @@ export const fallbackProducts: Product[] = [
   {
     id: "4566631822",
     name: "Animal Alphabet Cards",
-    facts: "26 animals plus 10 shapes. 5x7 and 8x10 PDFs.",
+    facts: PRODUCT_FACTS["4566631822"],
     category: "kids",
     image: "/products/alphabet.jpg",
     imageAlt:
@@ -63,7 +75,7 @@ export const fallbackProducts: Product[] = [
   {
     id: "4534956675",
     name: "Kids Affirmation Cards",
-    facts: "36 cards. 3x5 and 5x7 PDFs, plus JPGs.",
+    facts: PRODUCT_FACTS["4534956675"],
     category: "kids",
     image: "/products/affirmation-cards.jpg",
     imageAlt:
@@ -76,7 +88,7 @@ export const fallbackProducts: Product[] = [
   {
     id: "4539280226",
     name: "Educational Posters",
-    facts: "7 designs in 5 sizes. JPG files.",
+    facts: PRODUCT_FACTS["4539280226"],
     category: "kids",
     image: "/products/posters.jpg",
     imageAlt:
