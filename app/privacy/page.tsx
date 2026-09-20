@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { EMAIL } from "@/lib/shop";
+import { EMAIL, pageUrl } from "@/lib/shop";
 
 export const metadata: Metadata = {
   title: "Privacy",
   description: "Demure Design collects nothing on this site.",
   alternates: {
-    canonical: "https://demure.design/privacy",
+    canonical: pageUrl("/privacy"),
   },
 };
 

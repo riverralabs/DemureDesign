@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import { SiteChrome } from "@/components/SiteChrome";
+import { SITE_URL } from "@/lib/shop";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -10,7 +11,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://demure.design"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Demure Design · Printables for quiet time and planning",
     template: "%s · Demure Design",
@@ -18,13 +19,24 @@ export const metadata: Metadata = {
   description:
     "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
   alternates: {
-    canonical: "https://demure.design",
+    canonical: SITE_URL,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
     title: "Printables for quiet time and planning",
     description:
       "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
-    url: "https://demure.design",
+    url: SITE_URL,
     siteName: "Demure Design",
     locale: "en_US",
     type: "website",

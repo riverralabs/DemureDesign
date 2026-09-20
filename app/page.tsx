@@ -5,7 +5,7 @@ import { ProductShop } from "@/components/ProductShop";
 import { getCatalog } from "@/lib/catalog";
 import { homeJsonLd, jsonLdScript } from "@/lib/json-ld";
 import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
-import { EMAIL, ETSY_SHOP, GUMROAD_SHOP } from "@/lib/shop";
+import { EMAIL, ETSY_SHOP, GUMROAD_SHOP, SITE_URL } from "@/lib/shop";
 
 export const revalidate = 3600;
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
   alternates: {
-    canonical: "https://demure.design",
+    canonical: SITE_URL,
   },
   openGraph: {
     title: "Printables for quiet time and planning",

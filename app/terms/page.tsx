@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { EMAIL } from "@/lib/shop";
+import { EMAIL, pageUrl } from "@/lib/shop";
 
 export const metadata: Metadata = {
   title: "Terms",
   description: "Terms for Demure Design printables.",
   alternates: {
-    canonical: "https://demure.design/terms",
+    canonical: pageUrl("/terms"),
   },
 };
 
