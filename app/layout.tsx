@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-US" className={outfit.variable}>
+    <html lang="en-US" className={outfit.variable} data-scroll-behavior="smooth">
       <body>
         <SiteChrome>{children}</SiteChrome>
       </body>

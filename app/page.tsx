@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FloralCluster } from "@/components/FloralCluster";
 import { ProductShop } from "@/components/ProductShop";
 import { getCatalog } from "@/lib/catalog";
+import { ShopOnEtsy } from "@/components/ShopButtons";
 import { EMAIL, ETSY_SHOP } from "@/lib/shop";
 
 export const revalidate = 3600;
@@ -35,14 +36,7 @@ export default async function HomePage() {
               <a className="btn btn-primary" href="#shop">
                 Shop printables
               </a>
-              <a
-                className="btn btn-secondary"
-                href={ETSY_SHOP}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Shop on Etsy
-              </a>
+              <ShopOnEtsy href={ETSY_SHOP} />
             </div>
           </div>
         </div>

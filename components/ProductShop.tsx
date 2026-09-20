@@ -1,6 +1,7 @@
 "use client";
 
 import type { Product, ProductCategory } from "@/lib/products";
+import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -63,23 +64,9 @@ export function ProductShop({ products }: { products: Product[] }) {
               <h3 className="product-title">{product.name}</h3>
               <p className="product-facts">{product.facts}</p>
               <div className="product-links">
-                <a
-                  className="btn btn-primary"
-                  href={product.etsy.url}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Shop on Etsy
-                </a>
+                <ShopOnEtsy href={product.etsy.url} />
                 {product.gumroad ? (
-                  <a
-                    className="btn btn-secondary"
-                    href={product.gumroad.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Shop on Gumroad
-                  </a>
+                  <ShopOnGumroad href={product.gumroad.url} />
                 ) : null}
               </div>
             </article>
