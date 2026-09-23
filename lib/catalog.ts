@@ -150,7 +150,9 @@ export async function getCatalog(): Promise<Product[]> {
         facts: factsFrom(item.listingId, item.description),
         category: classify(item.title),
         image: item.image,
-        imageAlt: name,
+        imageAlt:
+          fallbackProducts.find((product) => product.id === item.listingId)
+            ?.imageAlt ?? name,
         etsy: { url: item.url },
         gumroad: gumroad ? { url: gumroad } : undefined,
       };

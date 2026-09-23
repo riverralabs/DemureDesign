@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { FloralCluster } from "@/components/FloralCluster";
 import { ProductShop } from "@/components/ProductShop";
 import { getCatalog } from "@/lib/catalog";
@@ -57,19 +56,6 @@ export default async function HomePage() {
             </p>
           </div>
         </div>
-      </section>
-
-      <section className="banner-section" aria-label="Brand banner">
-        <Image
-          src="/banner.jpg"
-          alt="Designed for your everyday and special moments. Planners and kids activities."
-          width={1920}
-          height={480}
-          className="banner-image"
-          sizes="100vw"
-          fetchPriority="high"
-          loading="eager"
-        />
       </section>
 
       <section className="shop-section" id="shop" aria-label="Printables">
