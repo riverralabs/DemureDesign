@@ -4,6 +4,7 @@
   --paper: #f7f3ec;
   --ink: #1f2a2e;
   --teal: #3f8da5;
+  --teal-ink: #1d657c;
   --sun: #f5c518;
   --caption: #5c6a70;
   --hairline: #e4dcd0;
@@ -25,6 +26,7 @@
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-teal: var(--teal);
+  --color-teal-ink: var(--teal-ink);
   --color-sun: var(--sun);
   --color-caption: var(--caption);
   --color-hairline: var(--hairline);
@@ -245,8 +247,8 @@ a {
 }
 
 .site-footer {
-  margin-top: 72px;
-  padding: 28px 0 36px;
+  margin-top: 0;
+  padding: 32px 0 40px;
   border-top: 1px solid var(--hairline);
   color: var(--caption);
   font-size: 15px;
@@ -261,7 +263,8 @@ a {
 .hero {
   display: grid;
   gap: 28px;
-  padding: 36px 0 56px;
+  padding-top: 40px;
+  padding-bottom: 48px;
   align-items: center;
 }
 
@@ -297,7 +300,7 @@ a {
 
 .eyebrow {
   margin: 0 0 12px;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-weight: 500;
   font-size: 13px;
   letter-spacing: 0.14em;
@@ -367,8 +370,12 @@ a {
 }
 
 .btn-primary {
-  background: var(--teal);
+  background: var(--teal-ink);
   color: var(--paper);
+}
+
+.btn-primary:hover {
+  background: #174f62;
 }
 
 .btn-secondary {
@@ -391,12 +398,11 @@ a {
 .btn-etsy {
   background: #f1641e;
   border-color: #f1641e;
-  color: #fff;
+  color: var(--ink);
 }
 
 .btn-etsy:hover {
-  background: #d95516;
-  border-color: #d95516;
+  box-shadow: inset 0 0 0 2px var(--ink);
 }
 
 .btn-gumroad {
@@ -425,18 +431,16 @@ a {
 .shop-section,
 .how-section,
 .faq-section,
-.about-section,
-.legal {
-  padding: 20px 0 8px;
+.about-section {
+  padding: 48px 0;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 720px) {
   .shop-section,
   .how-section,
   .faq-section,
-  .about-section,
-  .legal {
-    padding: 32px 0 8px;
+  .about-section {
+    padding: 72px 0;
   }
 }
 
@@ -485,8 +489,8 @@ a {
 }
 
 .filter[aria-pressed="true"] {
-  border-color: var(--teal);
-  background: var(--teal);
+  border-color: var(--teal-ink);
+  background: var(--teal-ink);
   color: var(--paper);
 }
 
@@ -508,7 +512,7 @@ a {
 }
 
 .product-card:hover {
-  border-color: var(--teal);
+  border-color: var(--teal-ink);
 }
 
 .product-media {
@@ -549,9 +553,7 @@ a {
 }
 
 .how-grid li {
-  padding: 20px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
+  padding: 0;
 }
 
 .how-grid h3 {
@@ -562,7 +564,7 @@ a {
 .how-grid h3::before {
   counter-increment: how;
   content: counter(how) ". ";
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .how-grid p {
@@ -576,14 +578,20 @@ a {
 
 .about-section a,
 .legal a {
-  color: var(--teal);
+  color: var(--teal-ink);
   text-underline-offset: 3px;
+}
+
+.legal a.btn-primary,
+.legal a.btn-primary:hover {
+  color: var(--paper);
+  text-decoration: none;
 }
 
 .legal {
   max-width: 36em;
-  padding-top: 40px;
-  padding-bottom: 24px;
+  padding-top: 48px;
+  padding-bottom: 32px;
 }
 
 .sun-rule {
@@ -593,20 +601,6 @@ a {
   margin: 0 0 20px;
   background: var(--sun);
   border: 0;
-}
-
-.banner-section {
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  background: #3e7eb8;
-}
-
-.banner-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
 }
 
 .faq-list {
@@ -651,7 +645,8 @@ a {
 
 @media (max-width: 879px) {
   .hero {
-    padding: 16px 0 28px;
+    padding-top: 24px;
+    padding-bottom: 32px;
     gap: 12px;
   }
 
@@ -684,7 +679,8 @@ a {
   .hero {
     grid-template-columns: minmax(240px, 0.9fr) 1.15fr;
     gap: 48px;
-    padding: 56px 0 72px;
+    padding-top: 64px;
+    padding-bottom: 72px;
   }
 
   .hero-float {

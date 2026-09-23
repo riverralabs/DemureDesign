@@ -41,6 +41,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Printables for quiet time and planning",
+    description:
+      "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
+  },
 };
 
 export const viewport: Viewport = {
