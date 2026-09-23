@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: updated,
       changeFrequency: "weekly",
       priority: 1,
-      images: [pageUrl("/logo.png"), ...productImages],
+      images: [pageUrl("/banner.jpg"), pageUrl("/logo.png"), ...productImages],
     },
     {
       url: pageUrl("/privacy"),
