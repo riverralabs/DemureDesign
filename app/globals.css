@@ -603,6 +603,20 @@ a {
   border: 0;
 }
 
+.banner-section {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: #3e7eb8;
+}
+
+.banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .faq-list {
   display: grid;
   gap: 16px;
