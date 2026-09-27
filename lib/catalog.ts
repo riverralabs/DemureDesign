@@ -1,5 +1,6 @@
 import { ETSY_RSS } from "@/lib/shop";
 import {
+  etsyListing,
   fallbackProducts,
   PRODUCT_FACTS,
   type Product,
@@ -90,7 +91,13 @@ type RssItem = {
   url: string;
   image: string;
   description: string;
+  price?: string;
 };
+
+export function parseEtsyPrice(html: string): string | undefined {
+  const match = html.match(/class="price">\s*([0-9]+(?:\.[0-9]+)?)\s+USD/i);
+  return match?.[1];
+}
 
 function parseRss(xml: string): RssItem[] {
   const blocks = xml.split(/<item>/i).slice(1);
@@ -111,6 +118,7 @@ function parseRss(xml: string): RssItem[] {
         .replace("il_570xN", "il_794xN") ?? "";
     const description =
       block.match(/<p class="description">([\s\S]*?)<\/p>/i)?.[1] ?? title;
+    const price = parseEtsyPrice(block);
 
     if (!listingId || !title || !link || !image) continue;
     if (PHYSICAL.test(title)) continue;
@@ -121,6 +129,7 @@ function parseRss(xml: string): RssItem[] {
       url: link.split("?")[0],
       image,
       description,
+      price,
     });
   }
 
@@ -153,7 +162,7 @@ export async function getCatalog(): Promise<Product[]> {
         imageAlt:
           fallbackProducts.find((product) => product.id === item.listingId)
             ?.imageAlt ?? name,
-        etsy: { url: item.url },
+        etsy: etsyListing(item.listingId, item.url, item.price),
         gumroad: gumroad ? { url: gumroad } : undefined,
       };
     });
