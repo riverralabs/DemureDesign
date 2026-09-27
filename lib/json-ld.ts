@@ -10,6 +10,32 @@ export function jsonLdScript(data: unknown) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+function listItem(product: Product) {
+  const item = {
+    name: product.name,
+    description: product.facts,
+    image: absoluteUrl(product.image),
+    url: product.etsy.url,
+  };
+
+  if (!product.etsy.price) {
+    return { "@type": "Thing", ...item };
+  }
+
+  return {
+    "@type": "Product",
+    ...item,
+    brand: { "@id": `${SITE_URL}/#organization` },
+    offers: {
+      "@type": "Offer",
+      url: product.etsy.url,
+      priceCurrency: "USD",
+      price: product.etsy.price,
+      availability: "https://schema.org/InStock",
+    },
+  };
+}
+
 export function homeJsonLd(products: Product[]) {
   const organization = {
     "@type": "Organization",
@@ -96,14 +122,7 @@ export function homeJsonLd(products: Product[]) {
         itemListElement: products.map((product, index) => ({
           "@type": "ListItem",
           position: index + 1,
-          item: {
-            "@type": "Product",
-            name: product.name,
-            description: product.facts,
-            image: absoluteUrl(product.image),
-            url: product.etsy.url,
-            brand: { "@id": `${SITE_URL}/#organization` },
-          },
+          item: listItem(product),
         })),
       },
     ],
