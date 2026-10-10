@@ -2,6 +2,7 @@ import { ETSY_RSS } from "@/lib/shop";
 import {
   etsyListing,
   fallbackProducts,
+  presentCatalog,
   PRODUCT_FACTS,
   type Product,
   type ProductCategory,
@@ -15,6 +16,11 @@ const GUMROAD_BY_LISTING: Record<string, string> = {
     "https://demuredesign.gumroad.com/l/animal-alphabet-flash-cards",
   "4534956675": "https://demuredesign.gumroad.com/l/kids-affirmation-cards",
   "4539280226": "https://demuredesign.gumroad.com/l/educational-wall-art",
+  "4592502270": "https://demuredesign.gumroad.com/l/the-rosalie",
+  "4592503468": "https://demuredesign.gumroad.com/l/the-jardin",
+  "4592523673": "https://demuredesign.gumroad.com/l/the-marais",
+  "4592536961": "https://demuredesign.gumroad.com/l/olive-striped-menu",
+  "4581680364": "https://demuredesign.gumroad.com/l/wedding-mood-board",
 };
 
 const NAME_BY_LISTING: Record<string, string> = {
@@ -27,6 +33,9 @@ const NAME_BY_LISTING: Record<string, string> = {
   "4592502270": "The Rosalie",
   "4592503468": "The Jardin",
   "4592523673": "The Marais",
+  "4592536961": "Olive Striped Menu",
+  "4588876694": "Floral Wedding Suite",
+  "4581680364": "Wedding Mood Board",
 };
 
 /** Listings whose shop photo is the file in public/products, not the Etsy CDN image. */
@@ -34,6 +43,9 @@ const LOCAL_IMAGE_LISTINGS = new Set([
   "4592502270",
   "4592503468",
   "4592523673",
+  "4592536961",
+  "4588876694",
+  "4581680364",
 ]);
 
 const PHYSICAL =
@@ -155,10 +167,10 @@ export async function getCatalog(): Promise<Product[]> {
         "User-Agent": "DemureDesign/1.0 (https://demure.design)",
       },
     });
-    if (!response.ok) return fallbackProducts;
+    if (!response.ok) return presentCatalog(fallbackProducts);
 
     const items = parseRss(await response.text());
-    if (items.length === 0) return fallbackProducts;
+    if (items.length === 0) return presentCatalog(fallbackProducts);
 
     const fromFeed = items.map((item) => {
       const known = fallbackProducts.find(
@@ -177,19 +189,22 @@ export async function getCatalog(): Promise<Product[]> {
         category: known?.category ?? classify(item.title),
         image,
         imageAlt: known?.imageAlt ?? name,
-        etsy: etsyListing(item.listingId, item.url, item.price),
+        etsy: etsyListing(
+          item.listingId,
+          item.url,
+          known?.salePrice ? undefined : item.price,
+        ),
         gumroad: gumroad ? { url: gumroad } : undefined,
         sku: known?.sku,
+        salePrice: known?.salePrice,
+        saleEndsAt: known?.saleEndsAt,
       };
     });
 
     const seen = new Set(fromFeed.map((product) => product.id));
-    const pinned = fallbackProducts.filter(
-      (product) =>
-        LOCAL_IMAGE_LISTINGS.has(product.id) && !seen.has(product.id),
-    );
-    return [...fromFeed, ...pinned];
+    const pinned = fallbackProducts.filter((product) => !seen.has(product.id));
+    return presentCatalog([...fromFeed, ...pinned]);
   } catch {
-    return fallbackProducts;
+    return presentCatalog(fallbackProducts);
   }
 }

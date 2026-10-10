@@ -15,12 +15,53 @@ export type Product = {
   etsy: EtsyListing;
   gumroad?: { url: string };
   sku?: string;
+  /** Sale price, such as "2.99". Regular price stays on etsy.price. */
+  salePrice?: string;
+  /** Inclusive end date, YYYY-MM-DD. After this date the regular price returns. */
+  saleEndsAt?: string;
+  /** Set at generation time while the sale is still active. */
+  compareAtPrice?: string;
+  /** Set at generation time while the sale is still active. */
+  priceValidUntil?: string;
 };
 
+const SALE_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** True through the end of saleEndsAt, compared as a UTC calendar date. */
+export function saleIsCurrent(saleEndsAt: string, now = new Date()) {
+  if (!SALE_DATE.test(saleEndsAt)) return false;
+  return now.toISOString().slice(0, 10) <= saleEndsAt;
+}
+
+/** Apply salePrice until saleEndsAt. After that date, etsy.price is the offer. */
+export function presentProduct(product: Product, now = new Date()): Product {
+  const regular = product.etsy.price;
+  if (!product.salePrice || !product.saleEndsAt || !regular) return product;
+  if (!saleIsCurrent(product.saleEndsAt, now)) {
+    return {
+      ...product,
+      compareAtPrice: undefined,
+      priceValidUntil: undefined,
+    };
+  }
+  return {
+    ...product,
+    etsy: { ...product.etsy, price: product.salePrice },
+    compareAtPrice: regular,
+    priceValidUntil: product.saleEndsAt,
+  };
+}
+
+export function presentCatalog(products: Product[], now = new Date()) {
+  return products.map((product) => presentProduct(product, now));
+}
+
 export const ETSY_PRICE_BY_LISTING: Record<string, string> = {
+  "4592536961": "5.98",
   "4592523673": "5.98",
   "4592503468": "5.98",
   "4592502270": "5.98",
+  "4588876694": "9.98",
   "4581680364": "9.98",
   "4566631822": "4.99",
   "4563523161": "2.99",
@@ -40,6 +81,12 @@ export function etsyListing(
 }
 
 export const PRODUCT_FACTS: Record<string, string> = {
+  "4592536961":
+    "An olive striped wedding menu with a scalloped edge. Sized 5x7. You edit it in Canva.",
+  "4588876694":
+    "Menus, place cards, table numbers, and a welcome sign in burgundy, sage, and navy. You edit it in Canva.",
+  "4581680364":
+    "A wedding mood board and floral vision planner. You edit it in Canva.",
   "4592502270":
     "A crimson floral wedding menu with fine line art blooms and a delicate frame. Comes in 5x7 and 8x12.",
   "4592503468":
@@ -145,6 +192,9 @@ export const fallbackProducts: Product[] = [
       "https://www.etsy.com/listing/4592502270/crimson-floral-wedding-menu-template",
     ),
     sku: "DD-ROSALIE-MENU",
+    salePrice: "2.99",
+    saleEndsAt: "2026-11-09",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/the-rosalie" },
   },
   {
     id: "4592503468",
@@ -159,6 +209,9 @@ export const fallbackProducts: Product[] = [
       "https://www.etsy.com/listing/4592503468/blue-botanical-signature-drink-sign",
     ),
     sku: "DD-JARDIN-BAR",
+    salePrice: "2.99",
+    saleEndsAt: "2026-11-09",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/the-jardin" },
   },
   {
     id: "4592523673",
@@ -173,5 +226,55 @@ export const fallbackProducts: Product[] = [
       "https://www.etsy.com/listing/4592523673/vintage-wedding-menu-template-art-deco",
     ),
     sku: "DD-MARAIS-MENU",
+    salePrice: "2.99",
+    saleEndsAt: "2026-11-09",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/the-marais" },
+  },
+  {
+    id: "4592536961",
+    name: "Olive Striped Menu",
+    facts: PRODUCT_FACTS["4592536961"],
+    category: "wedding",
+    image: "/products/olive.jpg",
+    imageAlt:
+      "Olive striped wedding menu on cream paper, with a scalloped olive border and a striped card behind it.",
+    etsy: etsyListing(
+      "4592536961",
+      "https://www.etsy.com/listing/4592536961/olive-green-striped-wedding-menu",
+    ),
+    salePrice: "2.99",
+    saleEndsAt: "2026-11-09",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/olive-striped-menu" },
+  },
+  {
+    id: "4588876694",
+    name: "Floral Wedding Suite",
+    facts: PRODUCT_FACTS["4588876694"],
+    category: "wedding",
+    image: "/products/floral-suite.jpg",
+    imageAlt:
+      "Floral wedding suite in burgundy, sage, and navy, with a menu, place cards, table numbers, and a welcome sign.",
+    etsy: etsyListing(
+      "4588876694",
+      "https://www.etsy.com/listing/4588876694/floral-wedding-menu-template-canva-place",
+    ),
+    salePrice: "4.99",
+    saleEndsAt: "2026-11-04",
+  },
+  {
+    id: "4581680364",
+    name: "Wedding Mood Board",
+    facts: PRODUCT_FACTS["4581680364"],
+    category: "planning",
+    image: "/products/mood-board.jpg",
+    imageAlt:
+      "Wedding mood board with a floral border, photo frames, and a palette of blush, sage, and blue.",
+    etsy: etsyListing(
+      "4581680364",
+      "https://www.etsy.com/listing/4581680364/wedding-mood-board-template-canva",
+    ),
+    salePrice: "4.99",
+    saleEndsAt: "2026-10-24",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/wedding-mood-board" },
   },
 ];

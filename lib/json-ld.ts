@@ -33,6 +33,9 @@ function listItem(product: Product) {
       priceCurrency: "USD",
       price: product.etsy.price,
       availability: "https://schema.org/InStock",
+      ...(product.priceValidUntil
+        ? { priceValidUntil: product.priceValidUntil }
+        : {}),
     },
   };
 }
