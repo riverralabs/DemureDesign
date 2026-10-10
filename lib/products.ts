@@ -23,6 +23,8 @@ export type Product = {
   compareAtPrice?: string;
   /** Set at generation time while the sale is still active. */
   priceValidUntil?: string;
+  /** False removes the listing from the shop, schema, and the Etsy feed. */
+  active?: boolean;
 };
 
 const SALE_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -52,8 +54,16 @@ export function presentProduct(product: Product, now = new Date()): Product {
   };
 }
 
+export function isInactiveListing(listingId: string) {
+  return fallbackProducts.some(
+    (product) => product.id === listingId && product.active === false,
+  );
+}
+
 export function presentCatalog(products: Product[], now = new Date()) {
-  return products.map((product) => presentProduct(product, now));
+  return products
+    .filter((product) => product.active !== false)
+    .map((product) => presentProduct(product, now));
 }
 
 export const ETSY_PRICE_BY_LISTING: Record<string, string> = {
@@ -61,7 +71,6 @@ export const ETSY_PRICE_BY_LISTING: Record<string, string> = {
   "4592523673": "5.98",
   "4592503468": "5.98",
   "4592502270": "5.98",
-  "4588876694": "9.98",
   "4581680364": "9.98",
   "4566631822": "4.99",
   "4563523161": "2.99",
@@ -83,8 +92,6 @@ export function etsyListing(
 export const PRODUCT_FACTS: Record<string, string> = {
   "4592536961":
     "An olive striped wedding menu with a scalloped edge. Sized 5x7. You edit it in Canva.",
-  "4588876694":
-    "Menus, place cards, table numbers, and a welcome sign in burgundy, sage, and navy. You edit it in Canva.",
   "4581680364":
     "A wedding mood board and floral vision planner. You edit it in Canva.",
   "4592502270":
@@ -249,17 +256,14 @@ export const fallbackProducts: Product[] = [
   {
     id: "4588876694",
     name: "Floral Wedding Suite",
-    facts: PRODUCT_FACTS["4588876694"],
+    active: false,
+    facts: "Inactive. This listing is not sold on demure.design.",
     category: "wedding",
-    image: "/products/floral-suite.jpg",
-    imageAlt:
-      "Floral wedding suite in burgundy, sage, and navy, with a menu, place cards, table numbers, and a welcome sign.",
-    etsy: etsyListing(
-      "4588876694",
-      "https://www.etsy.com/listing/4588876694/floral-wedding-menu-template-canva-place",
-    ),
-    salePrice: "4.99",
-    saleEndsAt: "2026-11-04",
+    image: "",
+    imageAlt: "",
+    etsy: {
+      url: "https://www.etsy.com/listing/4588876694/floral-wedding-menu-template-canva-place",
+    },
   },
   {
     id: "4581680364",

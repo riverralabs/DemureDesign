@@ -2,6 +2,7 @@ import { ETSY_RSS } from "@/lib/shop";
 import {
   etsyListing,
   fallbackProducts,
+  isInactiveListing,
   presentCatalog,
   PRODUCT_FACTS,
   type Product,
@@ -34,7 +35,6 @@ const NAME_BY_LISTING: Record<string, string> = {
   "4592503468": "The Jardin",
   "4592523673": "The Marais",
   "4592536961": "Olive Striped Menu",
-  "4588876694": "Floral Wedding Suite",
   "4581680364": "Wedding Mood Board",
 };
 
@@ -44,7 +44,6 @@ const LOCAL_IMAGE_LISTINGS = new Set([
   "4592503468",
   "4592523673",
   "4592536961",
-  "4588876694",
   "4581680364",
 ]);
 
@@ -143,7 +142,7 @@ function parseRss(xml: string): RssItem[] {
     const price = parseEtsyPrice(block);
 
     if (!listingId || !title || !link || !image) continue;
-    if (PHYSICAL.test(title)) continue;
+    if (PHYSICAL.test(title) || isInactiveListing(listingId)) continue;
 
     items.push({
       listingId,
@@ -198,11 +197,14 @@ export async function getCatalog(): Promise<Product[]> {
         sku: known?.sku,
         salePrice: known?.salePrice,
         saleEndsAt: known?.saleEndsAt,
+        active: known?.active,
       };
     });
 
     const seen = new Set(fromFeed.map((product) => product.id));
-    const pinned = fallbackProducts.filter((product) => !seen.has(product.id));
+    const pinned = fallbackProducts.filter(
+      (product) => product.active !== false && !seen.has(product.id),
+    );
     return presentCatalog([...fromFeed, ...pinned]);
   } catch {
     return presentCatalog(fallbackProducts);
