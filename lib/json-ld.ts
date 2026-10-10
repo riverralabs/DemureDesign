@@ -25,6 +25,7 @@ function listItem(product: Product) {
   return {
     "@type": "Product",
     ...item,
+    ...(product.sku ? { sku: product.sku } : {}),
     brand: { "@id": `${SITE_URL}/#organization` },
     offers: {
       "@type": "Offer",
