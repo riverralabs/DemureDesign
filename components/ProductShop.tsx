@@ -63,6 +63,26 @@ export function ProductShop({ products }: { products: Product[] }) {
               </div>
               <h3 className="product-title">{product.name}</h3>
               <p className="product-facts">{product.facts}</p>
+              {product.salePrice && product.etsy.price ? (
+                <p className="product-price">
+                  {product.compareAtPrice ? (
+                    <>
+                      <span className="product-price-now">
+                        <span className="visually-hidden">Sale price </span>
+                        {`$${product.etsy.price}`}
+                      </span>
+                      <del className="product-price-was">
+                        <span className="visually-hidden">Regular price </span>
+                        {`$${product.compareAtPrice}`}
+                      </del>
+                    </>
+                  ) : (
+                    <span className="product-price-now">
+                      {`$${product.etsy.price}`}
+                    </span>
+                  )}
+                </p>
+              ) : null}
               <div className="product-links">
                 <ShopOnEtsy href={product.etsy.url} />
                 {product.gumroad ? (
