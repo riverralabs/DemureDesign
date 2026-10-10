@@ -1,4 +1,4 @@
-export type ProductCategory = "planning" | "kids";
+export type ProductCategory = "planning" | "kids" | "wedding";
 
 export type EtsyListing = {
   url: string;
@@ -14,9 +14,13 @@ export type Product = {
   imageAlt: string;
   etsy: EtsyListing;
   gumroad?: { url: string };
+  sku?: string;
 };
 
 export const ETSY_PRICE_BY_LISTING: Record<string, string> = {
+  "4592523673": "5.98",
+  "4592503468": "5.98",
+  "4592502270": "5.98",
   "4581680364": "9.98",
   "4566631822": "4.99",
   "4563523161": "2.99",
@@ -36,6 +40,12 @@ export function etsyListing(
 }
 
 export const PRODUCT_FACTS: Record<string, string> = {
+  "4592502270":
+    "A crimson floral wedding menu with fine line art blooms and a delicate frame. Comes in 5x7 and 8x12.",
+  "4592503468":
+    "A blue botanical signature drinks menu for your wedding bar, with space for his, hers and ours cocktails. Comes in 5x7 and 8x12.",
+  "4592523673":
+    "An Art Deco wedding menu in warm rust red and cream, with a double frame and a striped cover. Comes in 5x7 and 8x12.",
   "4534979142":
     "Undated monthly, weekly, and daily pages you can start on any day.",
   "4563523161": "Eight simple sea animals for little hands.",
@@ -121,5 +131,47 @@ export const fallbackProducts: Product[] = [
     gumroad: {
       url: "https://demuredesign.gumroad.com/l/educational-wall-art",
     },
+  },
+  {
+    id: "4592502270",
+    name: "The Rosalie",
+    facts: PRODUCT_FACTS["4592502270"],
+    category: "wedding",
+    image: "/products/rosalie.jpg",
+    imageAlt:
+      "The Rosalie crimson floral wedding menu on cream paper, with a cover page and a menu page inside a fine line frame.",
+    etsy: etsyListing(
+      "4592502270",
+      "https://www.etsy.com/listing/4592502270/crimson-floral-wedding-menu-template",
+    ),
+    sku: "DD-ROSALIE-MENU",
+  },
+  {
+    id: "4592503468",
+    name: "The Jardin",
+    facts: PRODUCT_FACTS["4592503468"],
+    category: "wedding",
+    image: "/products/jardin.jpg",
+    imageAlt:
+      "The Jardin blue botanical signature drinks sign, an arched menu with three cocktails on cream paper.",
+    etsy: etsyListing(
+      "4592503468",
+      "https://www.etsy.com/listing/4592503468/blue-botanical-signature-drink-sign",
+    ),
+    sku: "DD-JARDIN-BAR",
+  },
+  {
+    id: "4592523673",
+    name: "The Marais",
+    facts: PRODUCT_FACTS["4592523673"],
+    category: "wedding",
+    image: "/products/marais.jpg",
+    imageAlt:
+      "The Marais Art Deco wedding menu in rust red and cream, with a striped cover and a framed menu page.",
+    etsy: etsyListing(
+      "4592523673",
+      "https://www.etsy.com/listing/4592523673/vintage-wedding-menu-template-art-deco",
+    ),
+    sku: "DD-MARAIS-MENU",
   },
 ];

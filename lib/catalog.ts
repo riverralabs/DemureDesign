@@ -24,7 +24,17 @@ const NAME_BY_LISTING: Record<string, string> = {
   "4566631822": "Animal Alphabet Cards",
   "4534956675": "Kids Affirmation Cards",
   "4539280226": "Educational Posters",
+  "4592502270": "The Rosalie",
+  "4592503468": "The Jardin",
+  "4592523673": "The Marais",
 };
+
+/** Listings whose shop photo is the file in public/products, not the Etsy CDN image. */
+const LOCAL_IMAGE_LISTINGS = new Set([
+  "4592502270",
+  "4592503468",
+  "4592523673",
+]);
 
 const PHYSICAL =
   /\b(t-shirt|t shirt|graphic tee|toddler tee|cotton blend shirt|birthday tee)\b/i;
@@ -51,9 +61,9 @@ function unescapeXml(value: string) {
 }
 
 function classify(title: string): ProductCategory {
-  return /planner|journal|habit|budget|undated/i.test(title)
-    ? "planning"
-    : "kids";
+  if (/planner|journal|habit|budget|undated/i.test(title)) return "planning";
+  if (/\bwedding\b/i.test(title)) return "wedding";
+  return "kids";
 }
 
 function shortName(listingId: string, title: string) {
@@ -150,22 +160,35 @@ export async function getCatalog(): Promise<Product[]> {
     const items = parseRss(await response.text());
     if (items.length === 0) return fallbackProducts;
 
-    return items.map((item) => {
-      const name = shortName(item.listingId, item.title);
+    const fromFeed = items.map((item) => {
+      const known = fallbackProducts.find(
+        (product) => product.id === item.listingId,
+      );
+      const name = known?.name ?? shortName(item.listingId, item.title);
       const gumroad = GUMROAD_BY_LISTING[item.listingId];
+      const image =
+        known && LOCAL_IMAGE_LISTINGS.has(item.listingId)
+          ? known.image
+          : item.image;
       return {
         id: item.listingId,
         name,
-        facts: factsFrom(item.listingId, item.description),
-        category: classify(item.title),
-        image: item.image,
-        imageAlt:
-          fallbackProducts.find((product) => product.id === item.listingId)
-            ?.imageAlt ?? name,
+        facts: known?.facts ?? factsFrom(item.listingId, item.description),
+        category: known?.category ?? classify(item.title),
+        image,
+        imageAlt: known?.imageAlt ?? name,
         etsy: etsyListing(item.listingId, item.url, item.price),
         gumroad: gumroad ? { url: gumroad } : undefined,
+        sku: known?.sku,
       };
     });
+
+    const seen = new Set(fromFeed.map((product) => product.id));
+    const pinned = fallbackProducts.filter(
+      (product) =>
+        LOCAL_IMAGE_LISTINGS.has(product.id) && !seen.has(product.id),
+    );
+    return [...fromFeed, ...pinned];
   } catch {
     return fallbackProducts;
   }

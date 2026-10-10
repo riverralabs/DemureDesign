@@ -9,6 +9,7 @@ const FILTERS: { id: "all" | ProductCategory; label: string }[] = [
   { id: "all", label: "All" },
   { id: "planning", label: "Planning" },
   { id: "kids", label: "Kids" },
+  { id: "wedding", label: "Wedding" },
 ];
 
 export function ProductShop({ products }: { products: Product[] }) {

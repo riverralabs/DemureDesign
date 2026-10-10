@@ -11,6 +11,7 @@ function absoluteImage(src: string) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const updated = new Date("2026-09-20");
+  const shopUpdated = new Date("2026-10-10");
   let productImages: string[] = [];
 
   try {
@@ -23,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: SITE_URL,
-      lastModified: updated,
+      lastModified: shopUpdated,
       changeFrequency: "weekly",
       priority: 1,
       images: [pageUrl("/banner.jpg"), pageUrl("/logo.png"), ...productImages],
