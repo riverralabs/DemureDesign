@@ -67,6 +67,8 @@ export function presentCatalog(products: Product[], now = new Date()) {
 }
 
 export const ETSY_PRICE_BY_LISTING: Record<string, string> = {
+  "4594383576": "5.98",
+  "4594363915": "5.98",
   "4592536961": "5.98",
   "4592523673": "5.98",
   "4592503468": "5.98",
@@ -90,6 +92,10 @@ export function etsyListing(
 }
 
 export const PRODUCT_FACTS: Record<string, string> = {
+  "4594383576":
+    "An oval cream wedding menu with olive script and a fine gold edge. The back is butter yellow pinstripe. Sized 5x7. You edit it in Canva.",
+  "4594363915":
+    "A burgundy striped wedding menu with a cream menu page and a monogram cover of a dancing couple. Two 5x7 designs. You edit it in Canva.",
   "4592536961":
     "An olive striped wedding menu with a scalloped edge. Sized 5x7. You edit it in Canva.",
   "4581680364":
@@ -252,6 +258,42 @@ export const fallbackProducts: Product[] = [
     salePrice: "2.99",
     saleEndsAt: "2026-11-09",
     gumroad: { url: "https://demuredesign.gumroad.com/l/olive-striped-menu" },
+  },
+  {
+    id: "4594363915",
+    name: "The Amour",
+    facts: PRODUCT_FACTS["4594363915"],
+    category: "wedding",
+    active: true,
+    image: "/products/amour.jpg",
+    imageAlt:
+      "The Amour burgundy striped wedding menu, with a cream menu page and a monogram cover of a dancing couple.",
+    etsy: etsyListing(
+      "4594363915",
+      "https://www.etsy.com/listing/4594363915/striped-wedding-menu-template-burgundy",
+    ),
+    sku: "DD-AMOUR-MENU",
+    salePrice: "2.99",
+    saleEndsAt: "2026-11-09",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/the-amour" },
+  },
+  {
+    id: "4594383576",
+    name: "The Solaine",
+    facts: PRODUCT_FACTS["4594383576"],
+    category: "wedding",
+    active: true,
+    image: "/products/solaine.jpg",
+    imageAlt:
+      "The Solaine oval cream wedding menu with olive script, set on linen beside two forks.",
+    etsy: etsyListing(
+      "4594383576",
+      "https://www.etsy.com/listing/4594383576/oval-wedding-menu-template-butter-yellow",
+    ),
+    sku: "DD-SOLAINE-MENU",
+    salePrice: "2.99",
+    saleEndsAt: "2026-11-09",
+    gumroad: { url: "https://demuredesign.gumroad.com/l/the-solaine" },
   },
   {
     id: "4588876694",

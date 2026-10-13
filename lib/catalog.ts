@@ -21,6 +21,8 @@ const GUMROAD_BY_LISTING: Record<string, string> = {
   "4592503468": "https://demuredesign.gumroad.com/l/the-jardin",
   "4592523673": "https://demuredesign.gumroad.com/l/the-marais",
   "4592536961": "https://demuredesign.gumroad.com/l/olive-striped-menu",
+  "4594363915": "https://demuredesign.gumroad.com/l/the-amour",
+  "4594383576": "https://demuredesign.gumroad.com/l/the-solaine",
   "4581680364": "https://demuredesign.gumroad.com/l/wedding-mood-board",
 };
 
@@ -35,6 +37,8 @@ const NAME_BY_LISTING: Record<string, string> = {
   "4592503468": "The Jardin",
   "4592523673": "The Marais",
   "4592536961": "Olive Striped Menu",
+  "4594363915": "The Amour",
+  "4594383576": "The Solaine",
   "4581680364": "Wedding Mood Board",
 };
 
@@ -44,6 +48,8 @@ const LOCAL_IMAGE_LISTINGS = new Set([
   "4592503468",
   "4592523673",
   "4592536961",
+  "4594363915",
+  "4594383576",
   "4581680364",
 ]);
 
