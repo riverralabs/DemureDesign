@@ -353,17 +353,9 @@ a {
 }
 
 .policy-note a,
-.faq-list a,
-.shop-alt {
+.faq-list a {
   color: var(--teal-ink);
   text-underline-offset: 3px;
-}
-
-.shop-alt {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--target);
-  font-size: 15px;
 }
 
 .hero-picks {

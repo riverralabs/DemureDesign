@@ -2,7 +2,7 @@
 
 import type { Product, ProductCategory } from "@/lib/products";
 import { saleCaption } from "@/lib/products";
-import { AlsoOnGumroad, ShopOnEtsy } from "@/components/ShopButtons";
+import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -95,7 +95,7 @@ export function ProductShop({ products }: { products: Product[] }) {
               <div className="product-links">
                 <ShopOnEtsy href={product.etsy.url} />
                 {product.gumroad ? (
-                  <AlsoOnGumroad href={product.gumroad.url} />
+                  <ShopOnGumroad href={product.gumroad.url} />
                 ) : null}
               </div>
             </article>
