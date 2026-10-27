@@ -30,14 +30,16 @@ export default function PrivacyPage() {
         payment details on this site.
       </p>
       <p>
-        All products are digital files delivered instantly. Nothing ships. We
-        do not provide refunds. See our <Link href="/terms">Terms</Link>.
+        All products are digital files delivered instantly. Nothing ships, so
+        there is no shipping cost. Sales are final. If a file will not open,
+        email us and we will send a working copy. See our{" "}
+        <Link href="/terms/#refunds">Terms</Link>.
       </p>
 
       <p>
         Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
       </p>
-      <p className="legal-updated">Updated 20 September 2026</p>
+      <p className="legal-updated">Updated 27 October 2026</p>
     </article>
   );
 }

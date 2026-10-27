@@ -1,15 +1,16 @@
 "use client";
 
 import type { Product, ProductCategory } from "@/lib/products";
-import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
+import { saleCaption } from "@/lib/products";
+import { AlsoOnGumroad, ShopOnEtsy } from "@/components/ShopButtons";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
 const FILTERS: { id: "all" | ProductCategory; label: string }[] = [
   { id: "all", label: "All" },
+  { id: "wedding", label: "Wedding" },
   { id: "planning", label: "Planning" },
   { id: "kids", label: "Kids" },
-  { id: "wedding", label: "Wedding" },
 ];
 
 export function ProductShop({ products }: { products: Product[] }) {
@@ -22,6 +23,7 @@ export function ProductShop({ products }: { products: Product[] }) {
         : products.filter((product) => product.category === filter),
     [filter, products],
   );
+  const saleNote = saleCaption(visible);
 
   return (
     <div>
@@ -49,6 +51,12 @@ export function ProductShop({ products }: { products: Product[] }) {
         </div>
       </div>
 
+      <p className="shop-note">
+        Same files on both shops. Etsy if you already shop there. Gumroad for a
+        direct checkout. Instant download, so there is no shipping cost.
+        {saleNote ? ` ${saleNote}` : ""}
+      </p>
+
       <ul className="product-grid">
         {visible.map((product) => (
           <li key={product.id}>
@@ -63,7 +71,7 @@ export function ProductShop({ products }: { products: Product[] }) {
               </div>
               <h3 className="product-title">{product.name}</h3>
               <p className="product-facts">{product.facts}</p>
-              {product.salePrice && product.etsy.price ? (
+              {product.etsy.price ? (
                 <p className="product-price">
                   {product.compareAtPrice ? (
                     <>
@@ -78,6 +86,7 @@ export function ProductShop({ products }: { products: Product[] }) {
                     </>
                   ) : (
                     <span className="product-price-now">
+                      <span className="visually-hidden">Price </span>
                       {`$${product.etsy.price}`}
                     </span>
                   )}
@@ -86,7 +95,7 @@ export function ProductShop({ products }: { products: Product[] }) {
               <div className="product-links">
                 <ShopOnEtsy href={product.etsy.url} />
                 {product.gumroad ? (
-                  <ShopOnGumroad href={product.gumroad.url} />
+                  <AlsoOnGumroad href={product.gumroad.url} />
                 ) : null}
               </div>
             </article>

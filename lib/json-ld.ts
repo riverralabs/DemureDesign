@@ -1,4 +1,4 @@
-import { EMAIL, ETSY_SHOP, GUMROAD_SHOP, SITE_URL } from "@/lib/shop";
+import { EMAIL, ETSY_SHOP, GUMROAD_SHOP, HOME_URL, SITE_URL } from "@/lib/shop";
 import type { Product } from "@/lib/products";
 
 function absoluteUrl(path: string) {
@@ -10,23 +10,28 @@ export function jsonLdScript(data: unknown) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-function listItem(product: Product) {
-  const item = {
+const STORE_DESCRIPTION =
+  "Wedding menus, undated planners, and kids printables. Instant download on Etsy and Gumroad.";
+
+const REFUND_ANSWER =
+  "Files are digital, so all sales are final. Nothing ships. If a file will not open, email us and we will send a working copy.";
+
+function productNode(product: Product) {
+  const node = {
+    "@type": product.etsy.price ? "Product" : "Thing",
+    "@id": `${HOME_URL}#product-${product.id}`,
     name: product.name,
     description: product.facts,
     image: absoluteUrl(product.image),
     url: product.etsy.url,
   };
 
-  if (!product.etsy.price) {
-    return { "@type": "Thing", ...item };
-  }
+  if (!product.etsy.price) return node;
 
   return {
-    "@type": "Product",
-    ...item,
+    ...node,
     ...(product.sku ? { sku: product.sku } : {}),
-    brand: { "@id": `${SITE_URL}/#organization` },
+    brand: { "@type": "Brand", name: "Demure Design" },
     offers: {
       "@type": "Offer",
       url: product.etsy.url,
@@ -41,11 +46,12 @@ function listItem(product: Product) {
 }
 
 export function homeJsonLd(products: Product[]) {
+  const priced = products.map(productNode);
   const organization = {
     "@type": "Organization",
-    "@id": `${SITE_URL}/#organization`,
+    "@id": `${HOME_URL}#organization`,
     name: "Demure Design",
-    url: SITE_URL,
+    url: HOME_URL,
     email: EMAIL,
     logo: `${SITE_URL}/logo.png`,
     sameAs: [ETSY_SHOP, GUMROAD_SHOP],
@@ -57,12 +63,11 @@ export function homeJsonLd(products: Product[]) {
       organization,
       {
         "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-        url: SITE_URL,
+        "@id": `${HOME_URL}#website`,
+        url: HOME_URL,
         name: "Demure Design",
-        description:
-          "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
-        publisher: { "@id": `${SITE_URL}/#organization` },
+        description: STORE_DESCRIPTION,
+        publisher: { "@id": `${HOME_URL}#organization` },
       },
       {
         "@type": "HowTo",
@@ -98,7 +103,7 @@ export function homeJsonLd(products: Product[]) {
             name: "Do these printables ship?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. They are digital files. You download them after checkout. Nothing ships.",
+              text: "No. They are digital files. You download them after checkout. Nothing ships, so there is no shipping cost.",
             },
           },
           {
@@ -106,15 +111,15 @@ export function homeJsonLd(products: Product[]) {
             name: "Do you offer refunds?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "No. Files arrive at purchase, so all sales are final. We do not provide refunds, returns, or exchanges.",
+              text: REFUND_ANSWER,
             },
           },
           {
             "@type": "Question",
-            name: "Should I buy on Etsy or Gumroad?",
+            name: "Etsy or Gumroad?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "The same printables are on both. Pick the shop you prefer.",
+              text: "The files are the same. Use Etsy if you already shop there. Use Gumroad for a direct checkout.",
             },
           },
         ],
@@ -123,12 +128,13 @@ export function homeJsonLd(products: Product[]) {
         "@type": "ItemList",
         name: "Demure Design printables",
         numberOfItems: products.length,
-        itemListElement: products.map((product, index) => ({
+        itemListElement: priced.map((product, index) => ({
           "@type": "ListItem",
           position: index + 1,
-          item: listItem(product),
+          item: product,
         })),
       },
+      ...priced.filter((product) => product["@type"] === "Product"),
     ],
   };
 }

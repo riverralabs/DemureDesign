@@ -61,3 +61,16 @@ export function ShopOnGumroad({ href }: ShopButtonProps) {
     </a>
   );
 }
+
+export function AlsoOnGumroad({ href }: ShopButtonProps) {
+  return (
+    <a
+      className="shop-alt"
+      href={href}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Also on Gumroad
+    </a>
+  );
+}

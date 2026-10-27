@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import { SiteChrome } from "@/components/SiteChrome";
-import { SITE_URL } from "@/lib/shop";
+import { HOME_URL, SITE_URL } from "@/lib/shop";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -13,13 +13,13 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Demure Design · Printables for quiet time and planning",
+    default: "Demure Design · Wedding menu printables",
     template: "%s · Demure Design",
   },
   description:
-    "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
+    "Wedding menus, undated planners, and kids printables. Instant download on Etsy and Gumroad.",
   alternates: {
-    canonical: SITE_URL,
+    canonical: HOME_URL,
   },
   robots: {
     index: true,
@@ -33,19 +33,19 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Printables for quiet time and planning",
+    title: "Wedding menus, planners, and kids printables",
     description:
-      "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
-    url: SITE_URL,
+      "Wedding menus, undated planners, and kids printables from Demure Design. Download instantly. Print at home.",
+    url: HOME_URL,
     siteName: "Demure Design",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Printables for quiet time and planning",
+    title: "Wedding menus, planners, and kids printables",
     description:
-      "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
+      "Wedding menus, undated planners, and kids printables from Demure Design. Download instantly. Print at home.",
   },
 };
 
