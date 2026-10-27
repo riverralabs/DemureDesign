@@ -27,7 +27,7 @@ export type Product = {
   active?: boolean;
 };
 
-const SALE_DATE = /^\d{4}-\d{2}-\d{2}$/;
+const SALE_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 /** True through the end of saleEndsAt, compared as a UTC calendar date. */
 export function saleIsCurrent(saleEndsAt: string, now = new Date()) {
@@ -64,6 +64,47 @@ export function presentCatalog(products: Product[], now = new Date()) {
   return products
     .filter((product) => product.active !== false)
     .map((product) => presentProduct(product, now));
+}
+
+const SALE_MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export function formatSaleDate(iso: string) {
+  const match = SALE_DATE.exec(iso);
+  if (!match) return iso;
+  const month = SALE_MONTHS[Number(match[2]) - 1];
+  if (!month) return iso;
+  return `${month} ${Number(match[3])}, ${match[1]}`;
+}
+
+/** One line for cards that are on sale right now. Empty when none are. */
+export function saleCaption(products: Product[]) {
+  const onSale = products.filter(
+    (product) => product.compareAtPrice && product.priceValidUntil,
+  );
+  if (onSale.length === 0) return "";
+  const ends = [...new Set(onSale.map((product) => product.priceValidUntil))];
+  if (ends.length !== 1 || !ends[0]) return "";
+  const halfOff = onSale.every((product) => {
+    const now = Number(product.etsy.price);
+    const regular = Number(product.compareAtPrice);
+    return regular > 0 && Math.abs(now * 2 - regular) < 0.02;
+  });
+  const when = formatSaleDate(ends[0]);
+  const offer = halfOff ? "Half off" : "Sale prices";
+  return `${offer} through ${when}. The regular price returns the next day.`;
 }
 
 export const ETSY_PRICE_BY_LISTING: Record<string, string> = {
@@ -107,14 +148,17 @@ export const PRODUCT_FACTS: Record<string, string> = {
   "4592523673":
     "An Art Deco wedding menu in warm rust red and cream, with a double frame and a striped cover. Comes in 5x7 and 8x12.",
   "4534979142":
-    "Undated monthly, weekly, and daily pages you can start on any day.",
-  "4563523161": "Eight simple sea animals for little hands.",
+    "Undated monthly, weekly, and daily pages you can start on any day. Print the PDF and begin this week.",
+  "4563523161":
+    "Eight simple sea animals, one page each, for little hands to color. A printable PDF.",
   "4542113652":
-    "Thirty easy animals. One per page. Print again whenever you want.",
+    "Thirty easy animals, one per page. Print a page when you want a quiet activity.",
   "4566631822":
-    "Printable animal alphabet cards your 3 to 6 year old can say out loud.",
-  "4534956675": "Thirty-six lunch box notes with calm, kind words.",
-  "4539280226": "Seven wall posters for letters, numbers, and shapes.",
+    "Animal alphabet cards, A to Z, for a 3 to 6 year old to say out loud. A printable PDF.",
+  "4534956675":
+    "Thirty-six lunch box notes with calm, kind words. Print a few and tuck one in.",
+  "4539280226":
+    "Seven wall posters for letters, numbers, and shapes. Print them at home and put them up.",
 };
 
 export const fallbackProducts: Product[] = [

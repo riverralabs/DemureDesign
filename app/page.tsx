@@ -1,29 +1,37 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { FloralCluster } from "@/components/FloralCluster";
+import Link from "next/link";
 import { ProductShop } from "@/components/ProductShop";
 import { getCatalog } from "@/lib/catalog";
 import { homeJsonLd, jsonLdScript } from "@/lib/json-ld";
-import { ShopOnEtsy, ShopOnGumroad } from "@/components/ShopButtons";
-import { EMAIL, ETSY_SHOP, GUMROAD_SHOP, SITE_URL } from "@/lib/shop";
+import { EMAIL, HOME_URL } from "@/lib/shop";
+import type { Product } from "@/lib/products";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Demure Design · Printables for quiet time and planning",
+    absolute: "Demure Design · Wedding menu printables",
   },
   description:
-    "Undated planners and kids printables. Instant download on Etsy and Gumroad.",
+    "Wedding menus, undated planners, and kids printables. Instant download on Etsy and Gumroad.",
   alternates: {
-    canonical: SITE_URL,
+    canonical: HOME_URL,
   },
   openGraph: {
-    title: "Printables for quiet time and planning",
+    title: "Wedding menus, planners, and kids printables",
     description:
-      "Undated planners and kids printables from Demure Design. Download instantly. Print at home.",
+      "Wedding menus, undated planners, and kids printables from Demure Design. Download instantly. Print at home.",
+    url: HOME_URL,
   },
 };
+
+function heroPicks(products: Product[]) {
+  const wedding = products.find((product) => product.category === "wedding");
+  const planning = products.find((product) => product.category === "planning");
+  const kids = products.find((product) => product.category === "kids");
+  return [wedding, planning, kids].filter((product) => product !== undefined);
+}
 
 export default async function HomePage() {
   const products = await getCatalog();
@@ -39,21 +47,39 @@ export default async function HomePage() {
       <section className="hero-section">
         <div className="shell hero">
           <div className="hero-float">
-            <FloralCluster className="hero-art" />
+            <ul className="hero-picks">
+              {heroPicks(products).map((product) => (
+                <li key={product.id}>
+                  <a className="hero-pick" href="#shop">
+                    <span className="hero-pick-media">
+                      <Image
+                        src={product.image}
+                        alt=""
+                        fill
+                        sizes="(max-width: 879px) 30vw, 160px"
+                      />
+                    </span>
+                    <span>{product.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="hero-copy">
-            <p className="eyebrow">Calm by design</p>
-            <h1>Calm planning and quiet play, ready to print</h1>
+            <p className="eyebrow">Instant download</p>
+            <h1>Printable wedding menus, planners, and kids activities</h1>
             <hr className="sun-rule" />
             <p className="lede">
-              Undated planners and kids printables you can print at home.
+              Buy once. Edit a menu in Canva, or print a PDF at home.
             </p>
             <div className="cta-row">
-              <ShopOnGumroad href={GUMROAD_SHOP} />
-              <ShopOnEtsy href={ETSY_SHOP} />
+              <a className="btn btn-primary" href="#shop">
+                Shop printables
+              </a>
             </div>
             <p className="cta-note">
-              Listing photos show the pages. Files arrive at checkout.
+              Instant download. Nothing ships, so there is no shipping cost.
+              Listing photos show the pages.
             </p>
           </div>
         </div>
@@ -62,7 +88,7 @@ export default async function HomePage() {
       <section className="banner-section" aria-label="Brand banner">
         <Image
           src="/banner.jpg"
-          alt="Designed for your everyday and special moments. Planners and kids activities."
+          alt="Designed for your everyday and special moments. Wedding menus, planners, and kids activities."
           width={1920}
           height={480}
           className="banner-image"
@@ -99,7 +125,9 @@ export default async function HomePage() {
             </li>
           </ol>
           <p className="policy-note">
-            Digital files only. Nothing ships. Sales are final. No refunds.
+            Files are digital, so all sales are final. Nothing ships. If a file
+            will not open, email us and we will send a working copy. Read the{" "}
+            <Link href="/terms/#refunds">refund terms</Link>.
           </p>
         </div>
       </section>
@@ -115,19 +143,23 @@ export default async function HomePage() {
               <dt>Do these printables ship?</dt>
               <dd>
                 No. They are digital files. You download them after checkout.
-                Nothing ships.
+                Nothing ships, so there is no shipping cost.
               </dd>
             </div>
             <div>
               <dt>Do you offer refunds?</dt>
               <dd>
-                No. Files arrive at purchase, so all sales are final. We do not
-                provide refunds, returns, or exchanges.
+                Files are digital, so all sales are final. If a file will not
+                open, email us and we will send a working copy. The{" "}
+                <Link href="/terms/#refunds">terms</Link> have the full policy.
               </dd>
             </div>
             <div>
               <dt>Etsy or Gumroad?</dt>
-              <dd>The same printables are on both. Pick the shop you prefer.</dd>
+              <dd>
+                The files are the same. Use Etsy if you already shop there. Use
+                Gumroad for a direct checkout.
+              </dd>
             </div>
           </dl>
         </div>
@@ -140,12 +172,20 @@ export default async function HomePage() {
             Demure Design
           </h2>
           <p>
-            A small studio making digital printables for quiet time, planning,
-            and little hands.
+            Demure Design is a small studio. The printables are wedding menus,
+            an undated planner, and quiet activities for kids. Menus are
+            editable in Canva. The planner and kids pages are PDFs you print at
+            home.
           </p>
-          <p>Instant download. Nothing ships. Files are for personal use.</p>
           <p>
-            Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            Instant download. Nothing ships, so there is no shipping cost. Files
+            are for personal use.
+          </p>
+          <p>
+            Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. If a file will
+            not open, email us and we will send a working copy. See the{" "}
+            <Link href="/contact/">contact page</Link> and the{" "}
+            <Link href="/terms/#refunds">refund terms</Link>.
           </p>
         </div>
       </section>

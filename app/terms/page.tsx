@@ -22,20 +22,25 @@ export default function TermsPage() {
         Listings and file delivery are handled by Etsy or Gumroad at checkout.
       </p>
 
-      <h2>Refunds</h2>
+      <h2 id="refunds">Refunds</h2>
       <p>
         Every product is a digital file. You receive it as soon as you pay.
-        Nothing ships.
+        Nothing ships, so there is no shipping cost.
       </p>
       <p>
         Because the files are delivered at purchase, all sales are final. We do
         not provide refunds, returns, or exchanges.
       </p>
+      <p>
+        If a file will not open, email{" "}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a> and we will send a working copy.
+        Check the listing photos before you buy so you know what is in the file.
+      </p>
 
       <p>
         Questions: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
       </p>
-      <p className="legal-updated">Updated 20 September 2026</p>
+      <p className="legal-updated">Updated 27 October 2026</p>
     </article>
   );
 }

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getCatalog } from "@/lib/catalog";
-import { pageUrl, SITE_URL } from "@/lib/shop";
+import { pageUrl } from "@/lib/shop";
 
 export const revalidate = 3600;
 
@@ -10,8 +10,8 @@ function absoluteImage(src: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const updated = new Date("2026-09-20");
-  const shopUpdated = new Date("2026-10-10");
+  const updated = new Date("2026-10-27");
+  const shopUpdated = new Date("2026-10-27");
   let productImages: string[] = [];
 
   try {
@@ -23,11 +23,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: SITE_URL,
+      url: pageUrl("/"),
       lastModified: shopUpdated,
       changeFrequency: "weekly",
       priority: 1,
       images: [pageUrl("/banner.jpg"), pageUrl("/logo.png"), ...productImages],
+    },
+    {
+      url: pageUrl("/contact"),
+      lastModified: updated,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     {
       url: pageUrl("/privacy"),

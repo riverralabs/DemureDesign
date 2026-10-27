@@ -44,8 +44,10 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             <a href={GUMROAD_SHOP} rel="noopener noreferrer" target="_blank">
               Gumroad
             </a>
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
+            <Link href="/contact/">Contact</Link>
+            <Link href="/terms/#refunds">Refunds</Link>
+            <Link href="/privacy/">Privacy</Link>
+            <Link href="/terms/">Terms</Link>
           </nav>
         </div>
       </footer>
